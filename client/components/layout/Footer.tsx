@@ -3,27 +3,27 @@ import { Linkedin, Mail, MessageSquare } from "lucide-react";
 
 const footerLinks = [
   {
-    title: "Company",
+    title: "Explore",
     items: [
-      { label: "About", href: "#about" },
-      { label: "Leadership", href: "#leadership" },
-      { label: "Careers", href: "#careers" },
+      { label: "Plan an Event", href: "#plan" },
+      { label: "Vendor Marketplace", href: "#vendors" },
+      { label: "Workflow", href: "#workflow" },
     ],
   },
   {
     title: "Solutions",
     items: [
-      { label: "Conversion Audits", href: "#solutions" },
-      { label: "Funnel Design", href: "#capabilities" },
-      { label: "Lifecycle Journeys", href: "#results" },
+      { label: "Wedding Planning", href: "#vendors" },
+      { label: "Corporate Experiences", href: "#vendors" },
+      { label: "Milestone Celebrations", href: "#vendors" },
     ],
   },
   {
     title: "Resources",
     items: [
-      { label: "Case Studies", href: "#results" },
-      { label: "Playbooks", href: "#resources" },
-      { label: "Webinars", href: "#resources" },
+      { label: "Pricing Guide", href: "#plan" },
+      { label: "Success Stories", href: "#growth" },
+      { label: "Vendor Onboarding", href: "#growth" },
     ],
   },
 ];
@@ -34,20 +34,20 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div className="space-y-6">
           <Link to="/" className="flex items-center gap-3 text-lg font-semibold text-foreground">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary via-primary to-secondary text-white shadow-lg shadow-primary/30">
-              C
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary via-secondary to-secondary text-white shadow-lg shadow-primary/30">
+              E
             </span>
             <div className="flex flex-col leading-tight">
               <span className="text-xs font-semibold uppercase tracking-[0.65em] text-primary/80">
-                Convince
+                Eventia
               </span>
               <span className="font-heading text-lg font-semibold text-foreground">
-                Growth Studio
+                Celebration Hub
               </span>
             </div>
           </Link>
           <p className="max-w-sm text-sm text-foreground/70">
-            We orchestrate persuasive digital journeys that convert cold traffic into loyal advocates. Every funnel we build is honed through experimentation, behavioral data, and human-centered storytelling.
+            Eventia Celebration Hub connects hosts with curated venues, storytellers, and experience makers. Plan weddings, corporate retreats, and milestone parties with persuasive insights guiding every decision.
           </p>
           <div className="flex items-center gap-3 text-sm font-medium text-foreground">
             <a
@@ -104,8 +104,8 @@ export function Footer() {
             <a href="#terms" className="transition hover:text-primary">
               Terms of Use
             </a>
-            <a href="#cookies" className="transition hover:text-primary">
-              Cookie Settings
+            <a href="#vendors" className="transition hover:text-primary">
+              Partner with Eventia
             </a>
           </div>
         </div>
