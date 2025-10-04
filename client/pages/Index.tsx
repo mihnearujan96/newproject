@@ -176,6 +176,38 @@ const vendorGrowthHighlights = [
 ];
 
 export default function Index() {
+  const navigate = useNavigate();
+  const { isAuthenticated, setPlanDetails } = useAuth();
+  const [formData, setFormData] = useState({
+    eventType: eventTypes[0],
+    date: "",
+    location: "",
+    budget: "",
+  });
+  const [formError, setFormError] = useState<string | null>(null);
+
+  const handlePlannerSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const trimmedLocation = formData.location.trim();
+    if (!trimmedLocation) {
+      setFormError("Select a city or radius to reveal available vendors.");
+      return;
+    }
+    setFormError(null);
+    const details = {
+      eventType: formData.eventType,
+      date: formData.date,
+      location: trimmedLocation,
+      budget: formData.budget.trim() || undefined,
+    };
+    setPlanDetails(details);
+    if (!isAuthenticated) {
+      navigate("/login", { state: { redirectTo: "/packages" } });
+      return;
+    }
+    navigate("/packages");
+  };
+
   return (
     <div className="relative isolate overflow-hidden">
       <div className="absolute inset-x-0 top-0 -z-10 flex h-[720px] justify-center">
