@@ -21,6 +21,9 @@ const AUTH_STORAGE_KEY = "eventia.auth";
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
     return window.localStorage.getItem(AUTH_STORAGE_KEY) === "true";
   });
   const [planDetails, setPlanDetails] = useState<PlanDetails | null>(null);
