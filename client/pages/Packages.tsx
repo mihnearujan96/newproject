@@ -28,13 +28,13 @@ const steps = [
       "Filter restaurants, ballrooms, rooftops, and unique spaces by capacity, vibe, and on-site services.",
   },
   {
-    number: 3,
+    number: 4,
     title: "Handpick storytellers and entertainment",
     description:
       "Compare photographers, filmmakers, DJs, and live acts with transparent pricing and availability.",
   },
   {
-    number: 4,
+    number: 5,
     title: "Assemble your persuasive package",
     description:
       "Add vendors to your offer, preview the total investment, and share a persuasive proposal instantly.",
