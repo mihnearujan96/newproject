@@ -249,7 +249,10 @@ export default function Index() {
                   <select
                     value={formData.eventType}
                     onChange={(event) =>
-                      setFormData((prev) => ({ ...prev, eventType: event.target.value }))
+                      setFormData((prev) => ({
+                        ...prev,
+                        eventType: event.target.value,
+                      }))
                     }
                     className="w-full rounded-2xl border border-border bg-white/90 px-4 py-3 pr-9 text-sm shadow-sm focus:border-primary focus:outline-none"
                   >
@@ -270,7 +273,10 @@ export default function Index() {
                     type="date"
                     value={formData.date}
                     onChange={(event) =>
-                      setFormData((prev) => ({ ...prev, date: event.target.value }))
+                      setFormData((prev) => ({
+                        ...prev,
+                        date: event.target.value,
+                      }))
                     }
                     className="w-full rounded-2xl border border-border bg-white/90 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
                   />
@@ -285,7 +291,10 @@ export default function Index() {
                     placeholder="Cluj-Napoca, within 30 km"
                     value={formData.location}
                     onChange={(event) =>
-                      setFormData((prev) => ({ ...prev, location: event.target.value }))
+                      setFormData((prev) => ({
+                        ...prev,
+                        location: event.target.value,
+                      }))
                     }
                     className="w-full rounded-2xl border border-border bg-white/90 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
                   />
@@ -300,7 +309,10 @@ export default function Index() {
                     placeholder="$10k - $20k"
                     value={formData.budget}
                     onChange={(event) =>
-                      setFormData((prev) => ({ ...prev, budget: event.target.value }))
+                      setFormData((prev) => ({
+                        ...prev,
+                        budget: event.target.value,
+                      }))
                     }
                     className="w-full rounded-2xl border border-border bg-white/90 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
                   />
@@ -315,7 +327,9 @@ export default function Index() {
                   <ArrowRight className="h-4 w-4" />
                 </button>
                 {formError ? (
-                  <p className="text-xs font-semibold text-destructive">{formError}</p>
+                  <p className="text-xs font-semibold text-destructive">
+                    {formError}
+                  </p>
                 ) : null}
               </div>
             </form>
@@ -330,8 +344,12 @@ export default function Index() {
                 key={stat.label}
                 className="rounded-2xl border border-white/40 bg-white/70 p-4 text-sm shadow-sm shadow-primary/10"
               >
-                <p className="font-heading text-lg font-semibold text-primary">{stat.value}</p>
-                <p className="text-foreground/65 uppercase tracking-[0.2em]">{stat.label}</p>
+                <p className="font-heading text-lg font-semibold text-primary">
+                  {stat.value}
+                </p>
+                <p className="text-foreground/65 uppercase tracking-[0.2em]">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>

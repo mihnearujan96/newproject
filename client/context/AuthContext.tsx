@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export type PlanDetails = {
   eventType: string;
@@ -32,7 +38,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
     if (typeof window === "undefined") {
       return;
     }
-    window.localStorage.setItem(AUTH_STORAGE_KEY, isAuthenticated ? "true" : "false");
+    window.localStorage.setItem(
+      AUTH_STORAGE_KEY,
+      isAuthenticated ? "true" : "false",
+    );
   }, [isAuthenticated]);
 
   const login = async (_email: string, _password: string) => {

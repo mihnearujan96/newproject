@@ -12,11 +12,15 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, planDetails } = useAuth();
-  const [{ email, password }, setCredentials] = useState({ email: "", password: "" });
+  const [{ email, password }, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const redirectTo = (location.state as LocationState | null)?.redirectTo ?? "/packages";
+  const redirectTo =
+    (location.state as LocationState | null)?.redirectTo ?? "/packages";
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,7 +51,9 @@ export default function Login() {
           Sign in to unlock bespoke celebration packages.
         </h1>
         <p className="max-w-2xl text-base text-foreground/70">
-          Save your event preferences, discover available venues, photographers, DJs, and florists in your chosen area, and generate persuasive proposals in minutes.
+          Save your event preferences, discover available venues, photographers,
+          DJs, and florists in your chosen area, and generate persuasive
+          proposals in minutes.
         </p>
       </div>
 
@@ -64,7 +70,10 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(event) =>
-                  setCredentials((prev) => ({ ...prev, email: event.target.value }))
+                  setCredentials((prev) => ({
+                    ...prev,
+                    email: event.target.value,
+                  }))
                 }
                 placeholder="you@example.com"
                 className="w-full rounded-2xl border border-border bg-white/95 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
@@ -79,7 +88,10 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={(event) =>
-                  setCredentials((prev) => ({ ...prev, password: event.target.value }))
+                  setCredentials((prev) => ({
+                    ...prev,
+                    password: event.target.value,
+                  }))
                 }
                 placeholder="Enter a secure password"
                 className="w-full rounded-2xl border border-border bg-white/95 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
@@ -93,14 +105,20 @@ export default function Login() {
             <p className="font-semibold text-primary">Next up</p>
             <ul className="mt-2 space-y-1">
               <li>Event: {planDetails.eventType}</li>
-              <li>Date: {planDetails.date ? planDetails.date : "To be decided"}</li>
+              <li>
+                Date: {planDetails.date ? planDetails.date : "To be decided"}
+              </li>
               <li>Location: {planDetails.location}</li>
-              {planDetails.budget ? <li>Budget: {planDetails.budget}</li> : null}
+              {planDetails.budget ? (
+                <li>Budget: {planDetails.budget}</li>
+              ) : null}
             </ul>
           </div>
         ) : null}
 
-        {error ? <p className="text-sm font-medium text-destructive">{error}</p> : null}
+        {error ? (
+          <p className="text-sm font-medium text-destructive">{error}</p>
+        ) : null}
 
         <button
           type="submit"
@@ -111,7 +129,8 @@ export default function Login() {
           <ArrowRight className="h-4 w-4" />
         </button>
         <p className="text-xs text-foreground/60">
-          New to Eventia? Sign in to create your profile and save your favorite venues and vendors for every celebration.
+          New to Eventia? Sign in to create your profile and save your favorite
+          venues and vendors for every celebration.
         </p>
       </form>
     </section>

@@ -150,47 +150,68 @@ export default function Packages() {
             Your persuasive package preview is ready.
           </h1>
           <p className="mx-auto max-w-2xl text-base text-foreground/70">
-            Follow the guided steps to review event details, explore curated vendors in your area, and craft a proposal every stakeholder will love.
+            Follow the guided steps to review event details, explore curated
+            vendors in your area, and craft a proposal every stakeholder will
+            love.
           </p>
         </header>
 
         {planDetails ? (
           <div className="grid gap-4 rounded-3xl border border-primary/15 bg-white/80 p-6 text-sm text-foreground/70 shadow-[0_30px_80px_-60px_rgba(56,91,253,0.45)] md:grid-cols-4">
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">Event</p>
-              <p className="font-heading text-lg font-semibold text-foreground">{planDetails.eventType}</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
+                Event
+              </p>
+              <p className="font-heading text-lg font-semibold text-foreground">
+                {planDetails.eventType}
+              </p>
             </div>
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">Date</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
+                Date
+              </p>
               <p className="flex items-center gap-2">
                 <CalendarDays className="h-4 w-4 text-primary" />
                 {planDetails.date || "Flexible"}
               </p>
             </div>
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">Location</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
+                Location
+              </p>
               <p className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-secondary" />
                 {planDetails.location}
               </p>
             </div>
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">Budget</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
+                Budget
+              </p>
               <p>{planDetails.budget ?? "Let’s explore options"}</p>
             </div>
           </div>
         ) : null}
 
         <div className="grid gap-6 rounded-3xl border border-border/60 bg-white/85 p-8 shadow-[0_35px_90px_-60px_rgba(255,138,84,0.45)]">
-          <h2 className="font-heading text-2xl font-semibold text-foreground">How it works</h2>
+          <h2 className="font-heading text-2xl font-semibold text-foreground">
+            How it works
+          </h2>
           <div className="grid gap-6 md:grid-cols-2">
             {formattedSteps.map((step) => (
-              <div key={step.number} className="rounded-2xl border border-border/60 bg-white/80 p-6">
+              <div
+                key={step.number}
+                className="rounded-2xl border border-border/60 bg-white/80 p-6"
+              >
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-foreground/50">
                   Step {step.number}
                 </p>
-                <p className="mt-2 font-heading text-lg text-foreground">{step.title}</p>
-                <p className="mt-2 text-sm text-foreground/70">{step.description}</p>
+                <p className="mt-2 font-heading text-lg text-foreground">
+                  {step.title}
+                </p>
+                <p className="mt-2 text-sm text-foreground/70">
+                  {step.description}
+                </p>
               </div>
             ))}
           </div>
@@ -200,20 +221,32 @@ export default function Packages() {
           {demoVendors.map((category) => {
             const Icon = vendorIconMap[category.category] ?? Compass;
             return (
-              <section key={category.category} className="space-y-4 rounded-3xl border border-border/60 bg-white/80 p-8 shadow-[0_20px_60px_-45px_rgba(56,91,253,0.35)]">
+              <section
+                key={category.category}
+                className="space-y-4 rounded-3xl border border-border/60 bg-white/80 p-8 shadow-[0_20px_60px_-45px_rgba(56,91,253,0.35)]"
+              >
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                   <div className="flex items-center gap-3">
                     <Icon className="h-6 w-6 text-primary" />
-                    <h3 className="font-heading text-xl font-semibold text-foreground">{category.category}</h3>
+                    <h3 className="font-heading text-xl font-semibold text-foreground">
+                      {category.category}
+                    </h3>
                   </div>
-                  <p className="text-sm text-foreground/65">Availability auto-refreshed 3 minutes ago</p>
+                  <p className="text-sm text-foreground/65">
+                    Availability auto-refreshed 3 minutes ago
+                  </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {category.options.map((vendor) => (
-                    <div key={vendor.name} className="rounded-2xl border border-border/60 bg-white/70 p-6">
+                    <div
+                      key={vendor.name}
+                      className="rounded-2xl border border-border/60 bg-white/70 p-6"
+                    >
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div>
-                          <p className="font-heading text-lg font-semibold text-foreground">{vendor.name}</p>
+                          <p className="font-heading text-lg font-semibold text-foreground">
+                            {vendor.name}
+                          </p>
                           <p className="text-xs uppercase tracking-[0.35em] text-foreground/40">
                             {vendor.distance}
                           </p>
@@ -245,9 +278,13 @@ export default function Packages() {
         <section className="rounded-3xl border border-primary/15 bg-gradient-to-r from-primary/10 via-white to-secondary/10 p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="max-w-2xl space-y-2 text-sm text-foreground/70">
-              <p className="font-heading text-2xl font-semibold text-primary">Finalize your persuasive offer</p>
+              <p className="font-heading text-2xl font-semibold text-primary">
+                Finalize your persuasive offer
+              </p>
               <p>
-                Select your favourite venues and creators, send introductions, and generate a branded PDF that outlines investment, timeline, and highlights for every stakeholder.
+                Select your favourite venues and creators, send introductions,
+                and generate a branded PDF that outlines investment, timeline,
+                and highlights for every stakeholder.
               </p>
             </div>
             <button className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40">
