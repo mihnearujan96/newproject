@@ -21,7 +21,9 @@ const NotFound = () => {
         This celebration page is off the guest list.
       </h1>
       <p className="max-w-2xl text-base text-foreground/70">
-        The link you followed might be outdated or mistyped. Return to Eventia Celebration Hub to discover handpicked venues, storytellers, and entertainers.
+        The link you followed might be outdated or mistyped. Return to Eventia
+        Celebration Hub to discover handpicked venues, storytellers, and
+        entertainers.
       </p>
       <Link
         to="/"

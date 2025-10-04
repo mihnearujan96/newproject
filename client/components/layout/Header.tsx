@@ -15,7 +15,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
-        <Link to="/" className="flex items-center gap-3 text-lg font-semibold text-foreground">
+        <Link
+          to="/"
+          className="flex items-center gap-3 text-lg font-semibold text-foreground"
+        >
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary via-secondary to-secondary text-white shadow-lg shadow-primary/30">
             E
           </span>

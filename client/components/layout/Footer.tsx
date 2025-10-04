@@ -33,7 +33,10 @@ export function Footer() {
     <footer className="border-t border-border/70 bg-gradient-to-br from-white via-background to-white">
       <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div className="space-y-6">
-          <Link to="/" className="flex items-center gap-3 text-lg font-semibold text-foreground">
+          <Link
+            to="/"
+            className="flex items-center gap-3 text-lg font-semibold text-foreground"
+          >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary via-secondary to-secondary text-white shadow-lg shadow-primary/30">
               E
             </span>
@@ -47,7 +50,10 @@ export function Footer() {
             </div>
           </Link>
           <p className="max-w-sm text-sm text-foreground/70">
-            Eventia Celebration Hub connects hosts with curated venues, storytellers, and experience makers. Plan weddings, corporate retreats, and milestone parties with persuasive insights guiding every decision.
+            Eventia Celebration Hub connects hosts with curated venues,
+            storytellers, and experience makers. Plan weddings, corporate
+            retreats, and milestone parties with persuasive insights guiding
+            every decision.
           </p>
           <div className="flex items-center gap-3 text-sm font-medium text-foreground">
             <a
@@ -82,10 +88,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-foreground/70">
               {group.items.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="transition hover:text-primary"
-                  >
+                  <a href={item.href} className="transition hover:text-primary">
                     {item.label}
                   </a>
                 </li>
@@ -96,7 +99,10 @@ export function Footer() {
       </div>
       <div className="border-t border-border/60 bg-white/70">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-6 text-sm text-foreground/60 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Convince Growth Studio. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Convince Growth Studio. All rights
+            reserved.
+          </p>
           <div className="flex flex-wrap items-center gap-4">
             <a href="#privacy" className="transition hover:text-primary">
               Privacy Policy
