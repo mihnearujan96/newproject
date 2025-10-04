@@ -41,7 +41,7 @@ const steps = [
   },
 ];
 
-const vendorIconMap: Record<string, React.ElementType> = {
+const vendorIconMap: Record<string, ElementType> = {
   Venues: Store,
   Photographers: Camera,
   Entertainment: Music,
