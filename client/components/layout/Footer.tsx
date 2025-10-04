@@ -110,9 +110,9 @@ export function Footer() {
             <a href="#terms" className="transition hover:text-primary">
               Terms of Use
             </a>
-            <a href="#vendors" className="transition hover:text-primary">
+            <Link to="/packages" className="transition hover:text-primary">
               Partner with Eventia
-            </a>
+            </Link>
           </div>
         </div>
       </div>
