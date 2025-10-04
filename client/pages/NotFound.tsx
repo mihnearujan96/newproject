@@ -18,10 +18,10 @@ const NotFound = () => {
         404
       </span>
       <h1 className="font-heading text-4xl text-foreground sm:text-5xl">
-        This page lost its persuasive spark.
+        This celebration page is off the guest list.
       </h1>
       <p className="max-w-2xl text-base text-foreground/70">
-        The link you followed might be outdated or mistyped. Return to the homepage to explore how Convince Growth Studio builds persuasive journeys.
+        The link you followed might be outdated or mistyped. Return to Eventia Celebration Hub to discover handpicked venues, storytellers, and entertainers.
       </p>
       <Link
         to="/"
