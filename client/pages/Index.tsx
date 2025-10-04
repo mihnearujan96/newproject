@@ -148,6 +148,12 @@ const smartPackages = [
   },
 ];
 
+const heroStats = [
+  { value: "10k+", label: "curated vendors" },
+  { value: "Real-time", label: "availability syncing" },
+  { value: "Minutes", label: "to proposal" },
+];
+
 const vendorGrowthHighlights = [
   {
     title: "Verified leads delivered",
