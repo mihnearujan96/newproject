@@ -325,21 +325,13 @@ export default function Index() {
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              "10k+ curated vendors",
-              "Availability synced in real-time",
-              "Package proposals in minutes",
-            ].map((stat) => (
+            {heroStats.map((stat) => (
               <div
-                key={stat}
+                key={stat.label}
                 className="rounded-2xl border border-white/40 bg-white/70 p-4 text-sm shadow-sm shadow-primary/10"
               >
-                <p className="font-heading text-lg font-semibold text-primary">
-                  {stat.split(" ")[0]}
-                </p>
-                <p className="text-foreground/65">
-                  {stat.replace(stat.split(" ")[0] + " ", "")}
-                </p>
+                <p className="font-heading text-lg font-semibold text-primary">{stat.value}</p>
+                <p className="text-foreground/65 uppercase tracking-[0.2em]">{stat.label}</p>
               </div>
             ))}
           </div>
