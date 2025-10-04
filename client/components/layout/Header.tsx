@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+
+import { useAuth } from "@/context/AuthContext";
 
 const navItems = [
   { label: "Plan", href: "#plan" },
@@ -11,6 +13,8 @@ const navItems = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur">
@@ -45,18 +49,29 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="#growth"
+          <Link
+            to="/packages"
             className="rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition hover:text-foreground"
           >
             Vendor Portal
-          </a>
-          <a
-            href="#plan"
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
-          >
-            Start planning
-          </a>
+          </Link>
+          {isAuthenticated ? (
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-full border border-border px-5 py-2 text-sm font-semibold text-foreground/80 transition hover:border-destructive hover:text-destructive"
+              onClick={() => logout()}
+            >
+              Log out
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
+              onClick={() => navigate("/login")}
+            >
+              Start planning
+            </button>
+          )}
         </div>
 
         <button
@@ -82,20 +97,36 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <a
-              href="#growth"
+            <Link
+              to="/packages"
               className="rounded-2xl px-4 py-3 transition hover:bg-primary/10"
               onClick={() => setOpen(false)}
             >
               Vendor Portal
-            </a>
-            <a
-              href="#plan"
-              className="mt-2 inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-secondary px-4 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
-              onClick={() => setOpen(false)}
-            >
-              Start planning
-            </a>
+            </Link>
+            {isAuthenticated ? (
+              <button
+                type="button"
+                className="mt-2 inline-flex items-center justify-center rounded-2xl border border-border px-4 py-3 font-semibold text-foreground transition hover:border-destructive hover:text-destructive"
+                onClick={() => {
+                  logout();
+                  setOpen(false);
+                }}
+              >
+                Log out
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="mt-2 inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-secondary px-4 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/login");
+                }}
+              >
+                Start planning
+              </button>
+            )}
           </nav>
         </div>
       ) : null}
