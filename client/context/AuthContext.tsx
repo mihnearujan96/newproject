@@ -29,6 +29,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [planDetails, setPlanDetails] = useState<PlanDetails | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
     window.localStorage.setItem(AUTH_STORAGE_KEY, isAuthenticated ? "true" : "false");
   }, [isAuthenticated]);
 
