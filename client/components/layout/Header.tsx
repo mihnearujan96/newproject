@@ -3,10 +3,10 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
-  { label: "Solutions", href: "#solutions" },
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Results", href: "#results" },
-  { label: "Resources", href: "#resources" },
+  { label: "Plan", href: "#plan" },
+  { label: "Vendors", href: "#vendors" },
+  { label: "Workflow", href: "#workflow" },
+  { label: "Growth", href: "#growth" },
 ];
 
 export function Header() {
@@ -16,15 +16,15 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
         <Link to="/" className="flex items-center gap-3 text-lg font-semibold text-foreground">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary via-primary to-secondary text-white shadow-lg shadow-primary/30">
-            C
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary via-secondary to-secondary text-white shadow-lg shadow-primary/30">
+            E
           </span>
           <div className="flex flex-col leading-tight">
             <span className="text-xs font-semibold uppercase tracking-[0.65em] text-primary/80">
-              Convince
+              Eventia
             </span>
             <span className="font-heading text-xl font-semibold text-foreground">
-              Growth Studio
+              Celebration Hub
             </span>
           </div>
         </Link>
@@ -43,16 +43,16 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href="#contact"
+            href="#growth"
             className="rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition hover:text-foreground"
           >
-            Contact
+            Vendor Portal
           </a>
           <a
-            href="#demo"
+            href="#plan"
             className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
           >
-            Schedule a Demo
+            Start planning
           </a>
         </div>
 
@@ -80,18 +80,18 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="#growth"
               className="rounded-2xl px-4 py-3 transition hover:bg-primary/10"
               onClick={() => setOpen(false)}
             >
-              Contact
+              Vendor Portal
             </a>
             <a
-              href="#demo"
+              href="#plan"
               className="mt-2 inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-secondary px-4 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
               onClick={() => setOpen(false)}
             >
-              Schedule a Demo
+              Start planning
             </a>
           </nav>
         </div>
