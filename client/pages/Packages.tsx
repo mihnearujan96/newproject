@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { ElementType, useMemo } from "react";
 import { Navigate } from "react-router-dom";
 import {
   ArrowRight,
