@@ -235,11 +235,18 @@ export default function Index() {
             <form
               className="grid gap-4 md:grid-cols-2"
               aria-label="Event planner form"
+              onSubmit={handlePlannerSubmit}
             >
               <label className="flex flex-col gap-2 text-sm font-medium text-foreground/80">
                 Event type
                 <div className="relative">
-                  <select className="w-full rounded-2xl border border-border bg-white/90 px-4 py-3 pr-9 text-sm shadow-sm focus:border-primary focus:outline-none">
+                  <select
+                    value={formData.eventType}
+                    onChange={(event) =>
+                      setFormData((prev) => ({ ...prev, eventType: event.target.value }))
+                    }
+                    className="w-full rounded-2xl border border-border bg-white/90 px-4 py-3 pr-9 text-sm shadow-sm focus:border-primary focus:outline-none"
+                  >
                     {eventTypes.map((type) => (
                       <option key={type}>{type}</option>
                     ))}
@@ -255,6 +262,10 @@ export default function Index() {
                   <CalendarDays className="absolute left-3 h-4 w-4 text-primary" />
                   <input
                     type="date"
+                    value={formData.date}
+                    onChange={(event) =>
+                      setFormData((prev) => ({ ...prev, date: event.target.value }))
+                    }
                     className="w-full rounded-2xl border border-border bg-white/90 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
                   />
                 </div>
@@ -266,6 +277,10 @@ export default function Index() {
                   <input
                     type="text"
                     placeholder="Cluj-Napoca, within 30 km"
+                    value={formData.location}
+                    onChange={(event) =>
+                      setFormData((prev) => ({ ...prev, location: event.target.value }))
+                    }
                     className="w-full rounded-2xl border border-border bg-white/90 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
                   />
                 </div>
@@ -277,18 +292,25 @@ export default function Index() {
                   <input
                     type="text"
                     placeholder="$10k - $20k"
+                    value={formData.budget}
+                    onChange={(event) =>
+                      setFormData((prev) => ({ ...prev, budget: event.target.value }))
+                    }
                     className="w-full rounded-2xl border border-border bg-white/90 px-10 py-3 text-sm shadow-sm focus:border-primary focus:outline-none"
                   />
                 </div>
               </label>
-              <div className="md:col-span-2">
+              <div className="md:col-span-2 space-y-3">
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-primary/30 transition hover:shadow-primary/40"
                 >
                   Build my celebration package
                   <ArrowRight className="h-4 w-4" />
                 </button>
+                {formError ? (
+                  <p className="text-xs font-semibold text-destructive">{formError}</p>
+                ) : null}
               </div>
             </form>
             <p className="mt-4 text-xs text-foreground/60">
