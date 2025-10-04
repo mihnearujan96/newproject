@@ -45,10 +45,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setPlanDetails(null);
   };
 
-  const value = useMemo<AuthContextValue>(
-    () => ({ isAuthenticated, login, logout, planDetails, setPlanDetails }),
-    [isAuthenticated, planDetails],
-  );
+  const value: AuthContextValue = {
+    isAuthenticated,
+    login,
+    logout,
+    planDetails,
+    setPlanDetails,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
