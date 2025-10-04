@@ -35,7 +35,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     window.localStorage.setItem(AUTH_STORAGE_KEY, isAuthenticated ? "true" : "false");
   }, [isAuthenticated]);
 
-  const login = async () => {
+  const login = async (_email: string, _password: string) => {
     await new Promise((resolve) => setTimeout(resolve, 300));
     setIsAuthenticated(true);
   };
