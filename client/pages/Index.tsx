@@ -1,3 +1,6 @@
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   ArrowRight,
   Building2,
@@ -14,6 +17,8 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
+
+import { useAuth } from "@/context/AuthContext";
 
 const eventTypes = [
   "Wedding",
