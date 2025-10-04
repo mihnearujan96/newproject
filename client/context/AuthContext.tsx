@@ -42,6 +42,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const logout = () => {
     setIsAuthenticated(false);
+    setPlanDetails(null);
   };
 
   const value = useMemo<AuthContextValue>(
