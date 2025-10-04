@@ -9,7 +9,10 @@ import { createRoot } from "react-dom/client";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Packages from "./pages/Packages";
 import { MainLayout } from "./layouts/MainLayout";
+import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -18,26 +21,44 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <MainLayout>
-                <Index />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <MainLayout>
-                <NotFound />
-              </MainLayout>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MainLayout>
+                  <Index />
+                </MainLayout>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <MainLayout>
+                  <Login />
+                </MainLayout>
+              }
+            />
+            <Route
+              path="/packages"
+              element={
+                <MainLayout>
+                  <Packages />
+                </MainLayout>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <MainLayout>
+                  <NotFound />
+                </MainLayout>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
