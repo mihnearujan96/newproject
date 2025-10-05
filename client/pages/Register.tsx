@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Globe, Key, Mail, User } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
