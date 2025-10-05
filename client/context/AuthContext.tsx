@@ -78,6 +78,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const value: AuthContextValue = {
     isAuthenticated,
     login,
+    register,
     logout,
     planDetails,
     setPlanDetails,
