@@ -46,13 +46,16 @@ export default function Register() {
 
       // If user had plan details saved before, keep them
       try {
-        const savedPlan = JSON.parse(
-          localStorage.getItem("eventia.plan") || "null",
-        );
+        const savedPlan = JSON.parse(localStorage.getItem("eventia.plan") || "null");
         if (savedPlan) setPlanDetails(savedPlan);
       } catch {}
 
-      navigate("/packages");
+      if (accountType === 'vendor') {
+        // Redirect vendor to service creation flow
+        navigate('/vendor/setup');
+      } else {
+        navigate('/packages');
+      }
     } catch (err) {
       setError("Unable to create account. Please try again.");
     } finally {
