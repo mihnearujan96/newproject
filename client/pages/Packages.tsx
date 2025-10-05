@@ -373,7 +373,7 @@ export default function Packages() {
                 and highlights for every stakeholder.
               </p>
             </div>
-            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40">
+            <button onClick={()=> navigate('/confirmation')} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40">
               Generate proposal
               <ArrowRight className="h-4 w-4" />
             </button>
