@@ -11,25 +11,42 @@ export default function AccountDashboard() {
   const [form, setForm] = useState<any>({});
 
   useEffect(() => {
-    const u =
-      typeof window !== "undefined"
-        ? JSON.parse(localStorage.getItem("eventia.user") || "null")
-        : null;
-    setUser(u);
-    const allServices = JSON.parse(
-      localStorage.getItem("eventia.vendor.services") || "[]",
-    );
-    const myServices = u
-      ? allServices.filter((s: any) => s.owner === u.email)
-      : [];
-    setServices(myServices);
-    const allRequests = JSON.parse(
-      localStorage.getItem("eventia.vendor.requests") || "[]",
-    );
-    const myRequests = u
-      ? allRequests.filter((r: any) => r.owner === u.email)
-      : [];
-    setRequests(myRequests);
+    const read = () => {
+      const u =
+        typeof window !== "undefined"
+          ? JSON.parse(localStorage.getItem("eventia.user") || "null")
+          : null;
+      setUser(u);
+      const allServices = JSON.parse(
+        localStorage.getItem("eventia.vendor.services") || "[]",
+      );
+      const myServices = u
+        ? allServices.filter((s: any) => s.owner === u.email)
+        : [];
+      setServices(myServices);
+      const allRequests = JSON.parse(
+        localStorage.getItem("eventia.vendor.requests") || "[]",
+      );
+      const myRequests = u
+        ? allRequests.filter((r: any) => r.owner === u.email)
+        : [];
+      setRequests(myRequests);
+    };
+
+    read();
+
+    const onStorage = (e: StorageEvent) => {
+      if (
+        e.key === "eventia.user" ||
+        e.key === "eventia.vendor.services" ||
+        e.key === "eventia.vendor.requests"
+      ) {
+        read();
+      }
+    };
+
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
   if (!user) {
