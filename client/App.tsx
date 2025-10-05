@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import VendorSetup from "./pages/VendorSetup";
 import AccountDashboard from "./pages/AccountDashboard";
 import Packages from "./pages/Packages";
+import VendorDetails from "./pages/VendorDetails";
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthProvider } from "./context/AuthContext";
 
