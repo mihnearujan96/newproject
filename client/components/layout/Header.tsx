@@ -74,7 +74,7 @@ export function Header() {
           <Link to="/confirmation" className="inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm">
             <span id="cart-icon" className="inline-flex items-center gap-2">
               Cart
-              <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-white">{useCart().items.length}</span>
+              <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-white">{cart.items.length}</span>
             </span>
           </Link>
 
