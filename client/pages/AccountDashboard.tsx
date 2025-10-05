@@ -49,11 +49,17 @@ export default function AccountDashboard() {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  if (!user) {
+  const storedUser =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("eventia.user") || "null")
+      : null;
+
+  if (!user && !storedUser) {
     return <Navigate to="/login" replace />;
   }
 
-  const isVendor = user?.accountType === "vendor";
+  const effectiveUser = user || storedUser;
+  const isVendor = effectiveUser?.accountType === "vendor";
 
   const startEdit = (svc: any) => {
     setEditingId(svc.id);
