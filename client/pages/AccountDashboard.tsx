@@ -660,11 +660,28 @@ export default function AccountDashboard() {
             </>
           ) : (
             <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
-              <h3 className="font-semibold">Your profile</h3>
-              <p className="mt-2 text-sm">
-                Manage your saved vendors and packages. Coming soon: saved
-                favorites and proposals list.
-              </p>
+              <h3 className="font-semibold">Your packages</h3>
+              <div className="mt-4 space-y-3">
+                {proposals.length === 0 ? (
+                  <p className="text-sm text-foreground/70">You don't have any submitted proposals yet.</p>
+                ) : (
+                  proposals.map((p) => (
+                    <div key={p.id} className="rounded-md border border-border/40 p-3">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-medium">Proposal {p.id}</div>
+                          <div className="text-xs text-foreground/70">Sent: {new Date(p.createdAt).toLocaleString()}</div>
+                        </div>
+                        <div className="text-sm font-semibold">${p.total.toLocaleString()}</div>
+                      </div>
+                      <div className="mt-2 text-sm text-foreground/70">Status: {p.status}</div>
+                      <div className="mt-3 flex gap-2">
+                        <button onClick={()=> navigate(`/proposal/${p.id}`)} className="rounded-full border px-3 py-1 text-sm">View</button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           )}
         </div>
