@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import demoVendors from "./Packages";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function VendorDetails() {
   const { slug } = useParams();
