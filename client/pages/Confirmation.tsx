@@ -9,16 +9,26 @@ export default function Confirmation() {
 
   const handleConfirm = () => {
     // persist a proposal summary in localStorage for demo
+    const id = Date.now().toString(36);
+    const currentUser = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('eventia.user') || 'null') : null;
     const proposal = {
-      id: Date.now().toString(36),
+      id,
       plan: planDetails,
       items,
       total,
+      clientEmail: currentUser?.email,
       createdAt: new Date().toISOString(),
+      status: 'pending',
     };
-    localStorage.setItem('eventia.proposal', JSON.stringify(proposal));
+    try {
+      const all = JSON.parse(localStorage.getItem('eventia.proposals') || '[]');
+      all.push(proposal);
+      localStorage.setItem('eventia.proposals', JSON.stringify(all));
+    } catch (err) {
+      localStorage.setItem('eventia.proposals', JSON.stringify([proposal]));
+    }
     clear();
-    navigate('/');
+    navigate(`/proposal/${id}`);
   };
 
   return (
