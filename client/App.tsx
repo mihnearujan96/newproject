@@ -105,6 +105,14 @@ const App = () => (
               }
             />
             <Route
+              path="/proposal/:id"
+              element={
+                <MainLayout>
+                  <ProposalSent />
+                </MainLayout>
+              }
+            />
+            <Route
               path="*"
               element={
                 <MainLayout>
