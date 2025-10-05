@@ -223,6 +223,24 @@ export default function Packages() {
         </div>
 
         <div className="grid gap-10">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <label className="text-sm text-foreground/70">Sort by</label>
+              <select className="rounded border px-2 py-1 text-sm" onChange={(e)=> setSortBy(e.target.value)} value={sortBy}>
+                <option value="relevance">Relevance</option>
+                <option value="price_asc">Price: Low to high</option>
+                <option value="price_desc">Price: High to low</option>
+              </select>
+              <button className="ml-3 rounded border px-2 py-1 text-sm" onClick={()=> setShowModify(p=>!p)}>{showModify ? 'Hide' : 'Modify dates'}</button>
+            </div>
+            {showModify ? (
+              <div className="flex items-center gap-2">
+                <input type="date" value={localDate} onChange={(e)=> setLocalDate(e.target.value)} className="rounded border px-2 py-1 text-sm" />
+                <input placeholder="Location" value={localLocation} onChange={(e)=> setLocalLocation(e.target.value)} className="rounded border px-2 py-1 text-sm" />
+                <button className="rounded-full bg-primary/90 px-3 py-1 text-white text-sm" onClick={()=>{ setPlanDetails({ eventType: planDetails?.eventType ?? 'Event', date: localDate, location: localLocation, budget: planDetails?.budget });}}>Apply</button>
+              </div>
+            ) : null}
+          </div>
           {demoVendors.map((category) => {
             const Icon = vendorIconMap[category.category] ?? Compass;
             return (
