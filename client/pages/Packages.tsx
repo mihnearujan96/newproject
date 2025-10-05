@@ -121,7 +121,11 @@ const demoVendors = [
 ];
 
 export default function Packages() {
-  const { isAuthenticated, planDetails } = useAuth();
+  const { isAuthenticated, planDetails, setPlanDetails } = useAuth();
+  const [sortBy, setSortBy] = useState<string>("relevance");
+  const [showModify, setShowModify] = useState(false);
+  const [localDate, setLocalDate] = useState<string>(planDetails?.date || "");
+  const [localLocation, setLocalLocation] = useState<string>(planDetails?.location || "");
 
   const formattedSteps = useMemo(
     () =>
