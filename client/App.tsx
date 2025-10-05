@@ -42,6 +42,14 @@ const App = () => (
               }
             />
             <Route
+              path="/register"
+              element={
+                <MainLayout>
+                  <Register />
+                </MainLayout>
+              }
+            />
+            <Route
               path="/packages"
               element={
                 <MainLayout>
