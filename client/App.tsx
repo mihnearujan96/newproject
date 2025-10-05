@@ -59,6 +59,22 @@ const App = () => (
               }
             />
             <Route
+              path="/vendor/dashboard"
+              element={
+                <MainLayout>
+                  <AccountDashboard />
+                </MainLayout>
+              }
+            />
+            <Route
+              path="/account"
+              element={
+                <MainLayout>
+                  <AccountDashboard />
+                </MainLayout>
+              }
+            />
+            <Route
               path="/packages"
               element={
                 <MainLayout>
