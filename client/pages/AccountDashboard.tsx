@@ -9,6 +9,12 @@ export default function AccountDashboard() {
   const [requests, setRequests] = useState<any[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<any>({});
+  // vendor/account UI state
+  const [editingProfile, setEditingProfile] = useState(false);
+  const [profileForm, setProfileForm] = useState<any>({});
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({ current: "", next: "", confirm: "" });
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
 
   useEffect(() => {
     const read = () => {
@@ -104,6 +110,143 @@ export default function AccountDashboard() {
       localStorage.setItem("eventia.vendor.requests", JSON.stringify(all));
       setRequests(all.filter((r: any) => r.owner === (effectiveUser?.email || user?.email)));
     }
+  };
+
+  // Inline simple calendar component
+  function VendorCalendar({ requests }: { requests: any[] }) {
+    const [month, setMonth] = useState(() => {
+      const d = new Date();
+      d.setDate(1);
+      return d;
+    });
+
+    const nextMonth = () => {
+      const d = new Date(month);
+      d.setMonth(d.getMonth() + 1);
+      setMonth(d);
+    };
+    const prevMonth = () => {
+      const d = new Date(month);
+      d.setMonth(d.getMonth() - 1);
+      setMonth(d);
+    };
+
+    const bookedSet = new Set<string>();
+    (requests || []).forEach((r: any) => {
+      const d = r?.date || r?.dateISO || r?.bookingDate;
+      if (d) {
+        try {
+          const dt = new Date(d);
+          if (!isNaN(dt.getTime())) {
+            bookedSet.add(dt.toISOString().slice(0, 10));
+          }
+        } catch {}
+      }
+    });
+
+    // build weeks
+    const year = month.getFullYear();
+    const m = month.getMonth();
+    const firstDay = new Date(year, m, 1).getDay();
+    const daysInMonth = new Date(year, m + 1, 0).getDate();
+    const weeks: Array<Array<number | null>> = [];
+    let week: Array<number | null> = Array.from({ length: 7 }, () => null);
+    let day = 1;
+    for (let i = 0; i < firstDay; i++) week[i] = null;
+    for (let i = firstDay; i < 7; i++) {
+      week[i] = day++;
+    }
+    weeks.push(week);
+    while (day <= daysInMonth) {
+      const w: Array<number | null> = [];
+      for (let i = 0; i < 7; i++) {
+        w.push(day <= daysInMonth ? day++ : null);
+      }
+      weeks.push(w);
+    }
+
+    return (
+      <div className="mt-4">
+        <div className="flex items-center justify-between">
+          <div className="font-medium">{month.toLocaleString(undefined, { month: "long", year: "numeric" })}</div>
+          <div className="flex gap-2">
+            <button onClick={prevMonth} className="rounded-full border px-2 py-1">Prev</button>
+            <button onClick={nextMonth} className="rounded-full border px-2 py-1">Next</button>
+          </div>
+        </div>
+        <table className="w-full mt-3 table-fixed">
+          <thead>
+            <tr className="text-sm text-foreground/70">
+              <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            {weeks.map((w, wi) => (
+              <tr key={wi} className="text-sm">
+                {w.map((d, di) => {
+                  if (d === null) return <td key={di} className="p-2"></td>;
+                  const iso = new Date(year, m, d).toISOString().slice(0, 10);
+                  const isBooked = bookedSet.has(iso);
+                  return (
+                    <td key={di} className="p-2">
+                      <div className={`w-full rounded-md px-2 py-1 text-xs ${isBooked ? 'bg-destructive/20 text-destructive' : 'bg-success/10 text-success'}`}>
+                        {d}
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  // profile/account actions handlers
+  const startEditingProfile = () => {
+    setProfileForm(effectiveUser ?? {});
+    setEditingProfile(true);
+  };
+
+  const saveProfile = () => {
+    try {
+      const cur = JSON.parse(localStorage.getItem('eventia.user') || 'null') || {};
+      const updated = { ...cur, ...profileForm };
+      localStorage.setItem('eventia.user', JSON.stringify(updated));
+      setUser(updated);
+      setEditingProfile(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const savePassword = () => {
+    try {
+      const cur = JSON.parse(localStorage.getItem('eventia.user') || 'null') || {};
+      if (passwordForm.next !== passwordForm.confirm) return alert('Passwords do not match');
+      const updated = { ...cur, password: passwordForm.next };
+      localStorage.setItem('eventia.user', JSON.stringify(updated));
+      setChangingPassword(false);
+      alert('Password updated');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteAccount = () => {
+    try {
+      const email = effectiveUser?.email || user?.email;
+      // remove user
+      localStorage.removeItem('eventia.user');
+      localStorage.setItem('eventia.auth', 'false');
+      // remove their services and requests
+      const sv = JSON.parse(localStorage.getItem('eventia.vendor.services') || '[]').filter((s:any)=>s.owner !== email);
+      localStorage.setItem('eventia.vendor.services', JSON.stringify(sv));
+      const rq = JSON.parse(localStorage.getItem('eventia.vendor.requests') || '[]').filter((r:any)=>r.owner !== email);
+      localStorage.setItem('eventia.vendor.requests', JSON.stringify(rq));
+      navigate('/');
+    } catch (err) { console.error(err); }
   };
 
   return (
