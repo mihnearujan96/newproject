@@ -32,95 +32,95 @@ const App = () => (
         <CartProvider>
           <BrowserRouter>
             <Routes>
-            <Route
-              path="/"
-              element={
-                <MainLayout>
-                  <Index />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <MainLayout>
-                  <Login />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <MainLayout>
-                  <Register />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/vendor/setup"
-              element={
-                <MainLayout>
-                  <VendorSetup />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/vendor/dashboard"
-              element={
-                <MainLayout>
-                  <AccountDashboard />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/account"
-              element={
-                <MainLayout>
-                  <AccountDashboard />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/packages"
-              element={
-                <MainLayout>
-                  <Packages />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/vendor/:slug"
-              element={
-                <MainLayout>
-                  <VendorDetails />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/confirmation"
-              element={
-                <MainLayout>
-                  <Confirmation />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="/proposal/:id"
-              element={
-                <MainLayout>
-                  <ProposalSent />
-                </MainLayout>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <MainLayout>
-                  <NotFound />
-                </MainLayout>
-              }
-            />
-          </Routes>
+              <Route
+                path="/"
+                element={
+                  <MainLayout>
+                    <Index />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <MainLayout>
+                    <Login />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <MainLayout>
+                    <Register />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/vendor/setup"
+                element={
+                  <MainLayout>
+                    <VendorSetup />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/vendor/dashboard"
+                element={
+                  <MainLayout>
+                    <AccountDashboard />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/account"
+                element={
+                  <MainLayout>
+                    <AccountDashboard />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/packages"
+                element={
+                  <MainLayout>
+                    <Packages />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/vendor/:slug"
+                element={
+                  <MainLayout>
+                    <VendorDetails />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/confirmation"
+                element={
+                  <MainLayout>
+                    <Confirmation />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/proposal/:id"
+                element={
+                  <MainLayout>
+                    <ProposalSent />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <MainLayout>
+                    <NotFound />
+                  </MainLayout>
+                }
+              />
+            </Routes>
           </BrowserRouter>
         </CartProvider>
       </AuthProvider>

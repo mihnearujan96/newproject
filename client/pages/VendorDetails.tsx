@@ -79,7 +79,9 @@ export default function VendorDetails() {
     },
   ];
 
-  const all = vendors.flatMap((c) => c.options.map((o) => ({ ...o, category: c.category })));
+  const all = vendors.flatMap((c) =>
+    c.options.map((o) => ({ ...o, category: c.category })),
+  );
   const slugToName = (s: string | undefined) => (s || "").replaceAll("-", " ");
   const name = slugToName(slug);
   const vendor = all.find((v) => v.name.toLowerCase() === name.toLowerCase());
@@ -88,7 +90,9 @@ export default function VendorDetails() {
     return (
       <section className="mx-auto w-full max-w-4xl px-6 py-20">
         <p>Vendor not found</p>
-        <button onClick={() => navigate(-1)} className="underline mt-4">Back</button>
+        <button onClick={() => navigate(-1)} className="underline mt-4">
+          Back
+        </button>
       </section>
     );
   }
@@ -96,21 +100,32 @@ export default function VendorDetails() {
   return (
     <section className="mx-auto w-full max-w-4xl px-6 py-20">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-sm text-foreground/70"><ArrowLeft className="h-4 w-4" /> Back</button>
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-2 text-sm text-foreground/70"
+        >
+          <ArrowLeft className="h-4 w-4" /> Back
+        </button>
         <h1 className="font-heading text-2xl font-semibold">{vendor.name}</h1>
       </div>
 
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         <div className="col-span-2 space-y-4">
-          <p className="text-sm text-foreground/70">{vendor.price} • {vendor.distance}</p>
+          <p className="text-sm text-foreground/70">
+            {vendor.price} • {vendor.distance}
+          </p>
           <ul className="mt-4 space-y-2 text-sm text-foreground/70">
             {vendor.perks.map((p) => (
-              <li key={p} className="flex items-center gap-2">• {p}</li>
+              <li key={p} className="flex items-center gap-2">
+                • {p}
+              </li>
             ))}
           </ul>
         </div>
         <div className="col-span-1">
-          <button className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-4 py-3 text-sm font-semibold text-white">Request availability</button>
+          <button className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-4 py-3 text-sm font-semibold text-white">
+            Request availability
+          </button>
         </div>
       </div>
     </section>

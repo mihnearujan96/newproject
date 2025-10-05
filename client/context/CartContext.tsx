@@ -1,4 +1,10 @@
-import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type CartItem = {
   id: string;

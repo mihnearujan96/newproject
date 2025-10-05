@@ -134,7 +134,9 @@ export default function Packages() {
   const [sortBy, setSortBy] = useState<string>("relevance");
   const [showModify, setShowModify] = useState(false);
   const [localDate, setLocalDate] = useState<string>(planDetails?.date || "");
-  const [localLocation, setLocalLocation] = useState<string>(planDetails?.location || "");
+  const [localLocation, setLocalLocation] = useState<string>(
+    planDetails?.location || "",
+  );
 
   const formattedSteps = useMemo(
     () =>
@@ -155,30 +157,32 @@ export default function Packages() {
 
     // animation: clone a floating element from button to cart icon
     try {
-      const btn = (e.target as HTMLElement).closest('button') as HTMLElement | null;
-      const cartEl = document.getElementById('cart-icon');
+      const btn = (e.target as HTMLElement).closest(
+        "button",
+      ) as HTMLElement | null;
+      const cartEl = document.getElementById("cart-icon");
       if (!btn || !cartEl) return;
       const start = btn.getBoundingClientRect();
       const end = cartEl.getBoundingClientRect();
-      const floatEl = document.createElement('div');
+      const floatEl = document.createElement("div");
       floatEl.textContent = vendor.name;
       Object.assign(floatEl.style, {
-        position: 'fixed',
+        position: "fixed",
         left: `${start.left}px`,
         top: `${start.top}px`,
-        background: 'white',
-        padding: '6px 10px',
-        borderRadius: '8px',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-        transition: 'transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms',
-        zIndex: '9999',
+        background: "white",
+        padding: "6px 10px",
+        borderRadius: "8px",
+        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+        transition: "transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms",
+        zIndex: "9999",
       });
       document.body.appendChild(floatEl);
       const dx = end.left + end.width / 2 - (start.left + start.width / 2);
       const dy = end.top + end.height / 2 - (start.top + start.height / 2);
       requestAnimationFrame(() => {
         floatEl.style.transform = `translate(${dx}px, ${dy}px) scale(0.25)`;
-        floatEl.style.opacity = '0.0';
+        floatEl.style.opacity = "0.0";
       });
       setTimeout(() => {
         floatEl.remove();
@@ -278,18 +282,49 @@ export default function Packages() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <label className="text-sm text-foreground/70">Sort by</label>
-              <select className="rounded border px-2 py-1 text-sm" onChange={(e)=> setSortBy(e.target.value)} value={sortBy}>
+              <select
+                className="rounded border px-2 py-1 text-sm"
+                onChange={(e) => setSortBy(e.target.value)}
+                value={sortBy}
+              >
                 <option value="relevance">Relevance</option>
                 <option value="price_asc">Price: Low to high</option>
                 <option value="price_desc">Price: High to low</option>
               </select>
-              <button className="ml-3 rounded border px-2 py-1 text-sm" onClick={()=> setShowModify(p=>!p)}>{showModify ? 'Hide' : 'Modify dates'}</button>
+              <button
+                className="ml-3 rounded border px-2 py-1 text-sm"
+                onClick={() => setShowModify((p) => !p)}
+              >
+                {showModify ? "Hide" : "Modify dates"}
+              </button>
             </div>
             {showModify ? (
               <div className="flex items-center gap-2">
-                <input type="date" value={localDate} onChange={(e)=> setLocalDate(e.target.value)} className="rounded border px-2 py-1 text-sm" />
-                <input placeholder="Location" value={localLocation} onChange={(e)=> setLocalLocation(e.target.value)} className="rounded border px-2 py-1 text-sm" />
-                <button className="rounded-full bg-primary/90 px-3 py-1 text-white text-sm" onClick={()=>{ setPlanDetails({ eventType: planDetails?.eventType ?? 'Event', date: localDate, location: localLocation, budget: planDetails?.budget });}}>Apply</button>
+                <input
+                  type="date"
+                  value={localDate}
+                  onChange={(e) => setLocalDate(e.target.value)}
+                  className="rounded border px-2 py-1 text-sm"
+                />
+                <input
+                  placeholder="Location"
+                  value={localLocation}
+                  onChange={(e) => setLocalLocation(e.target.value)}
+                  className="rounded border px-2 py-1 text-sm"
+                />
+                <button
+                  className="rounded-full bg-primary/90 px-3 py-1 text-white text-sm"
+                  onClick={() => {
+                    setPlanDetails({
+                      eventType: planDetails?.eventType ?? "Event",
+                      date: localDate,
+                      location: localLocation,
+                      budget: planDetails?.budget,
+                    });
+                  }}
+                >
+                  Apply
+                </button>
               </div>
             ) : null}
           </div>
@@ -348,11 +383,22 @@ export default function Packages() {
                           ))}
                         </ul>
                         <div className="mt-5 flex gap-2">
-                          <button onClick={(e)=> handleAdd(vendor, e)} className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-2 text-xs font-semibold text-foreground/80 transition hover:border-primary hover:text-primary">
+                          <button
+                            onClick={(e) => handleAdd(vendor, e)}
+                            className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-2 text-xs font-semibold text-foreground/80 transition hover:border-primary hover:text-primary"
+                          >
                             Add to package
                             <ArrowRight className="h-4 w-4" />
                           </button>
-                          <Link to={'/vendor/' + vendor.name.toLowerCase().replace(/\s+/g, '-') } className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold text-foreground/80 hover:text-primary">View details</Link>
+                          <Link
+                            to={
+                              "/vendor/" +
+                              vendor.name.toLowerCase().replace(/\s+/g, "-")
+                            }
+                            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold text-foreground/80 hover:text-primary"
+                          >
+                            View details
+                          </Link>
                         </div>
                       </div>
                     ))}
@@ -374,7 +420,10 @@ export default function Packages() {
                 and highlights for every stakeholder.
               </p>
             </div>
-            <button onClick={()=> navigate('/confirmation')} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40">
+            <button
+              onClick={() => navigate("/confirmation")}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:shadow-primary/40"
+            >
               Generate proposal
               <ArrowRight className="h-4 w-4" />
             </button>
