@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Edit2, Trash, Check, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function AccountDashboard() {
   const navigate = useNavigate();
