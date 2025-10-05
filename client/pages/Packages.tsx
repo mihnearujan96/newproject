@@ -120,6 +120,14 @@ const demoVendors = [
   },
 ];
 
+function parsePrice(s: string | undefined) {
+  if (!s) return Number.POSITIVE_INFINITY;
+  const m = s.match(/\d+[\d,]*/);
+  if (!m) return Number.POSITIVE_INFINITY;
+  const num = Number(m[0].replace(/,/g, ""));
+  return isNaN(num) ? Number.POSITIVE_INFINITY : num;
+}
+
 export default function Packages() {
   const { isAuthenticated, planDetails, setPlanDetails } = useAuth();
   const [sortBy, setSortBy] = useState<string>("relevance");
