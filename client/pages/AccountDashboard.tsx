@@ -20,6 +20,8 @@ export default function AccountDashboard() {
   });
   const [confirmingDelete, setConfirmingDelete] = useState(false);
 
+  const [proposals, setProposals] = useState<any[]>([]);
+
   useEffect(() => {
     const read = () => {
       const u =
@@ -41,6 +43,19 @@ export default function AccountDashboard() {
         ? allRequests.filter((r: any) => r.owner === u.email)
         : [];
       setRequests(myRequests);
+
+      // load proposals for client
+      try {
+        const allProposals = JSON.parse(
+          localStorage.getItem("eventia.proposals") || "[]",
+        );
+        const my = u
+          ? allProposals.filter((p: any) => p.clientEmail === u.email)
+          : [];
+        setProposals(my);
+      } catch {
+        setProposals([]);
+      }
     };
 
     read();
@@ -49,7 +64,8 @@ export default function AccountDashboard() {
       if (
         e.key === "eventia.user" ||
         e.key === "eventia.vendor.services" ||
-        e.key === "eventia.vendor.requests"
+        e.key === "eventia.vendor.requests" ||
+        e.key === "eventia.proposals"
       ) {
         read();
       }
