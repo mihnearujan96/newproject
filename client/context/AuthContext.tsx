@@ -13,9 +13,18 @@ export type PlanDetails = {
   budget?: string;
 };
 
+type UserProfile = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  city?: string;
+  yearOfBirth?: number | string;
+};
+
 type AuthContextValue = {
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
+  register: (profile: UserProfile & { password: string }) => Promise<void>;
   logout: () => void;
   planDetails: PlanDetails | null;
   setPlanDetails: (details: PlanDetails | null) => void;
