@@ -38,7 +38,11 @@ export default function VendorSetup() {
     try {
       // persist to localStorage for demo purposes
       const existing = JSON.parse(localStorage.getItem("eventia.vendor.services") || "[]");
-      existing.push({ ...service, images: previewUrls });
+      const currentUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("eventia.user") || "null") : null;
+      const owner = currentUser?.email ?? "unknown@eventia.local";
+      // assign an id
+      const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      existing.push({ id, owner, ...service, images: previewUrls });
       localStorage.setItem("eventia.vendor.services", JSON.stringify(existing));
       // redirect to packages or vendor dashboard
       navigate("/packages");
