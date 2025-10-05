@@ -58,9 +58,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setIsAuthenticated(true);
   };
 
+  const register = async (profile: UserProfile & { password: string }) => {
+    // In a real app, POST to an API. Here we persist a demo profile in localStorage
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("eventia.user", JSON.stringify(profile));
+    }
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    setIsAuthenticated(true);
+  };
+
   const logout = () => {
     setIsAuthenticated(false);
     setPlanDetails(null);
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem("eventia.user");
+    }
   };
 
   const value: AuthContextValue = {
