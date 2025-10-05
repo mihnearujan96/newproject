@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Edit2, Trash, Check, X } from "lucide-react";
 
