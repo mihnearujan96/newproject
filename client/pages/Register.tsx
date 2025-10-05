@@ -41,6 +41,7 @@ export default function Register() {
           ? undefined
           : Number(form.yob),
         password: form.password,
+        accountType,
       } as any);
 
       // If user had plan details saved before, keep them
