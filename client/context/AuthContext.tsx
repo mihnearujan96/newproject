@@ -58,7 +58,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setIsAuthenticated(true);
   };
 
-  const register = async (profile: UserProfile & { password: string }) => {
+  const register = async (profile: UserProfile & { password: string; accountType?: string }) => {
     // In a real app, POST to an API. Here we persist a demo profile in localStorage
     if (typeof window !== "undefined") {
       window.localStorage.setItem("eventia.user", JSON.stringify(profile));
