@@ -147,7 +147,7 @@ export default function Packages() {
 
   const { addItem } = useCart();
 
-  const handleAdd = (vendor: any, e: React.MouseEvent) => {
+  const handleAdd = (vendor: any, e: any) => {
     // create cart item
     const price = parsePrice(vendor.price);
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
