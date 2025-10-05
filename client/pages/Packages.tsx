@@ -130,6 +130,7 @@ function parsePrice(s: string | undefined) {
 
 export default function Packages() {
   const { isAuthenticated, planDetails, setPlanDetails } = useAuth();
+  const navigate = useNavigate();
   const [sortBy, setSortBy] = useState<string>("relevance");
   const [showModify, setShowModify] = useState(false);
   const [localDate, setLocalDate] = useState<string>(planDetails?.date || "");
