@@ -268,17 +268,40 @@ export default function AccountDashboard() {
       <div className="grid gap-8 md:grid-cols-3">
         <div className="col-span-1 rounded-2xl border border-border/60 bg-white/80 p-6">
           <h3 className="font-semibold">Profile</h3>
-          <p className="mt-2 text-sm">
-            <strong>
-              {effectiveUser.firstName} {effectiveUser.lastName}
-            </strong>
-          </p>
-          <p className="text-sm text-foreground/70">{effectiveUser.email}</p>
-          <p className="text-sm text-foreground/70">{effectiveUser.city}</p>
-          <p className="text-sm text-foreground/70">{effectiveUser.yearOfBirth}</p>
-          <p className="mt-3 text-xs text-foreground/60">
-            Account type: {effectiveUser.accountType}
-          </p>
+          {editingProfile ? (
+            <div className="mt-2 space-y-2 text-sm">
+              <label className="flex flex-col gap-1">
+                <span className="text-xs text-foreground/70">First name</span>
+                <input className="rounded border px-3 py-2" value={profileForm.firstName || ''} onChange={(e)=> setProfileForm((p:any)=> ({...p, firstName: e.target.value}))} />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-xs text-foreground/70">Last name</span>
+                <input className="rounded border px-3 py-2" value={profileForm.lastName || ''} onChange={(e)=> setProfileForm((p:any)=> ({...p, lastName: e.target.value}))} />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-xs text-foreground/70">City</span>
+                <input className="rounded border px-3 py-2" value={profileForm.city || ''} onChange={(e)=> setProfileForm((p:any)=> ({...p, city: e.target.value}))} />
+              </label>
+              <div className="flex gap-2">
+                <button onClick={saveProfile} className="rounded-full bg-primary/90 px-3 py-2 text-white">Save</button>
+                <button onClick={()=> setEditingProfile(false)} className="rounded-full border px-3 py-2">Cancel</button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p className="mt-2 text-sm">
+                <strong>
+                  {effectiveUser.firstName} {effectiveUser.lastName}
+                </strong>
+              </p>
+              <p className="text-sm text-foreground/70">{effectiveUser.email}</p>
+              <p className="text-sm text-foreground/70">{effectiveUser.city}</p>
+              <p className="text-sm text-foreground/70">{effectiveUser.yearOfBirth}</p>
+              <p className="mt-3 text-xs text-foreground/60">
+                Account type: {effectiveUser.accountType}
+              </p>
+            </>
+          )}
         </div>
 
         <div className="col-span-2 space-y-6">
