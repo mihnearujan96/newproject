@@ -95,6 +95,14 @@ const App = () => (
               }
             />
             <Route
+              path="/confirmation"
+              element={
+                <MainLayout>
+                  <Confirmation />
+                </MainLayout>
+              }
+            />
+            <Route
               path="*"
               element={
                 <MainLayout>
