@@ -17,6 +17,8 @@ import Packages from "./pages/Packages";
 import VendorDetails from "./pages/VendorDetails";
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import Confirmation from "./pages/Confirmation";
 
 const queryClient = new QueryClient();
 
