@@ -1,5 +1,6 @@
 import { ElementType, useMemo } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
+import { useMemo, useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
