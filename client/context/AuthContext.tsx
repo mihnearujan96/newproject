@@ -53,8 +53,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
     );
   }, [isAuthenticated]);
 
-  const login = async (_email: string, _password: string) => {
+  const login = async (email: string, _password: string) => {
+    // Simulate async authentication and persist a minimal user profile so
+    // other parts of the app that read `eventia.user` (like the dashboard)
+    // can find the current user after login.
     await new Promise((resolve) => setTimeout(resolve, 300));
+    if (typeof window !== "undefined") {
+      try {
+        const existing = JSON.parse(window.localStorage.getItem("eventia.user") || "null");
+        if (!existing) {
+          const firstName = email ? email.split("@")[0] : "User";
+          const profile = { firstName, lastName: "", email, accountType: "client" };
+          window.localStorage.setItem("eventia.user", JSON.stringify(profile));
+        }
+      } catch {}
+    }
     setIsAuthenticated(true);
   };
 
