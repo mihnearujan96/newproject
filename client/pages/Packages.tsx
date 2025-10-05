@@ -347,7 +347,7 @@ export default function Packages() {
                           ))}
                         </ul>
                         <div className="mt-5 flex gap-2">
-                          <button className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-2 text-xs font-semibold text-foreground/80 transition hover:border-primary hover:text-primary">
+                          <button onClick={(e)=> handleAdd(vendor, e)} className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-2 text-xs font-semibold text-foreground/80 transition hover:border-primary hover:text-primary">
                             Add to package
                             <ArrowRight className="h-4 w-4" />
                           </button>
