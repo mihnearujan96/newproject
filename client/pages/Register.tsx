@@ -75,6 +75,25 @@ export default function Register() {
         </p>
       </div>
 
+      <div className="mb-4 flex w-full items-center justify-center">
+        <div className="inline-flex rounded-2xl bg-white/90 p-1 shadow-sm">
+          <button
+            type="button"
+            onClick={() => setAccountType('client')}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${accountType === 'client' ? 'bg-primary/10 text-primary' : 'text-foreground/70'}`}
+          >
+            I am a client
+          </button>
+          <button
+            type="button"
+            onClick={() => setAccountType('vendor')}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${accountType === 'vendor' ? 'bg-primary/10 text-primary' : 'text-foreground/70'}`}
+          >
+            I am a vendor
+          </button>
+        </div>
+      </div>
+
       <form
         onSubmit={handleSubmit}
         className="w-full space-y-4 rounded-3xl border border-border/70 bg-white/80 p-8 text-left shadow-lg"
