@@ -50,10 +50,17 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <Link
-            to="/packages"
+            to={(() => {
+              try {
+                const u = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('eventia.user')||'null') : null;
+                return u?.accountType === 'vendor' ? '/vendor/dashboard' : '/account';
+              } catch {
+                return '/account';
+              }
+            })()}
             className="rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition hover:text-foreground"
           >
-            Vendor Portal
+            Dashboard
           </Link>
           {isAuthenticated ? (
             <button
