@@ -260,38 +260,50 @@ export default function Packages() {
                   </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
-                  {category.options.map((vendor) => (
-                    <div
-                      key={vendor.name}
-                      className="rounded-2xl border border-border/60 bg-white/70 p-6"
-                    >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div>
-                          <p className="font-heading text-lg font-semibold text-foreground">
-                            {vendor.name}
-                          </p>
-                          <p className="text-xs uppercase tracking-[0.35em] text-foreground/40">
-                            {vendor.distance}
-                          </p>
+                  {category.options
+                    .slice()
+                    .sort((a, b) => {
+                      const pa = parsePrice(a.price);
+                      const pb = parsePrice(b.price);
+                      if (sortBy === "price_asc") return pa - pb;
+                      if (sortBy === "price_desc") return pb - pa;
+                      return 0;
+                    })
+                    .map((vendor) => (
+                      <div
+                        key={vendor.name}
+                        className="rounded-2xl border border-border/60 bg-white/70 p-6"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div>
+                            <p className="font-heading text-lg font-semibold text-foreground">
+                              {vendor.name}
+                            </p>
+                            <p className="text-xs uppercase tracking-[0.35em] text-foreground/40">
+                              {vendor.distance}
+                            </p>
+                          </div>
+                          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                            {vendor.price}
+                          </span>
                         </div>
-                        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                          {vendor.price}
-                        </span>
+                        <ul className="mt-4 space-y-2 text-sm text-foreground/70">
+                          {vendor.perks.map((perk) => (
+                            <li key={perk} className="flex items-center gap-2">
+                              <Check className="h-4 w-4 text-primary" />
+                              {perk}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-5 flex gap-2">
+                          <button className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-2 text-xs font-semibold text-foreground/80 transition hover:border-primary hover:text-primary">
+                            Add to package
+                            <ArrowRight className="h-4 w-4" />
+                          </button>
+                          <Link to={'/vendor/' + vendor.name.toLowerCase().replace(/\s+/g, '-') } className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold text-foreground/80 hover:text-primary">View details</Link>
+                        </div>
                       </div>
-                      <ul className="mt-4 space-y-2 text-sm text-foreground/70">
-                        {vendor.perks.map((perk) => (
-                          <li key={perk} className="flex items-center gap-2">
-                            <Check className="h-4 w-4 text-primary" />
-                            {perk}
-                          </li>
-                        ))}
-                      </ul>
-                      <button className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-4 py-2 text-xs font-semibold text-foreground/80 transition hover:border-primary hover:text-primary">
-                        Add to package
-                        <ArrowRight className="h-4 w-4" />
-                      </button>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </section>
             );
