@@ -130,9 +130,13 @@ export default function Login() {
           <ArrowRight className="h-4 w-4" />
         </button>
         <p className="text-xs text-foreground/60">
-          New to Eventia? Sign in to create your profile and save your favorite
-          venues and vendors for every celebration.
+          New to Eventia? Sign up to create your profile and save your favorite venues and vendors for every celebration.
         </p>
+        <div className="mt-4 flex w-full justify-center">
+          <Link to="/register" className="inline-flex items-center gap-2 rounded-full border border-border bg-white/90 px-5 py-2 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary">
+            Create an account
+          </Link>
+        </div>
       </form>
     </section>
   );
