@@ -19,6 +19,7 @@ import { MainLayout } from "./layouts/MainLayout";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import Confirmation from "./pages/Confirmation";
+import ProposalSent from "./pages/ProposalSent";
 
 const queryClient = new QueryClient();
 
