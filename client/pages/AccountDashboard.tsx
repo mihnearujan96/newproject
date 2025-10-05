@@ -282,6 +282,37 @@ export default function AccountDashboard() {
         </div>
 
         <div className="col-span-2 space-y-6">
+              <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
+                <h3 className="font-semibold">Calendar</h3>
+                <p className="text-sm text-foreground/70">Overview of bookings and availability. Booked dates are red; available dates are green.</p>
+                <div className="mt-4">
+                  <VendorCalendar requests={requests} />
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
+                <h3 className="font-semibold">Account actions</h3>
+                <div className="mt-4 flex flex-col gap-3">
+                  <button onClick={startEditingProfile} className="inline-flex items-center gap-2 rounded-full border px-4 py-2">Edit profile</button>
+                  <button onClick={() => setChangingPassword(true)} className="inline-flex items-center gap-2 rounded-full border px-4 py-2">Change password</button>
+                  <button onClick={() => setConfirmingDelete(true)} className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-destructive">Delete account</button>
+
+                  {changingPassword ? (
+                    <div className="mt-3 space-y-2">
+                      <label className="flex flex-col gap-1 text-sm"><span className="text-xs text-foreground/70">New password</span><input type="password" className="rounded border px-3 py-2" value={passwordForm.next} onChange={(e)=> setPasswordForm(p=> ({...p, next: e.target.value}))} /></label>
+                      <label className="flex flex-col gap-1 text-sm"><span className="text-xs text-foreground/70">Confirm password</span><input type="password" className="rounded border px-3 py-2" value={passwordForm.confirm} onChange={(e)=> setPasswordForm(p=> ({...p, confirm: e.target.value}))} /></label>
+                      <div className="flex gap-2"><button onClick={savePassword} className="rounded-full bg-primary/90 px-3 py-2 text-white">Save</button><button onClick={()=> setChangingPassword(false)} className="rounded-full border px-3 py-2">Cancel</button></div>
+                    </div>
+                  ) : null}
+
+                  {confirmingDelete ? (
+                    <div className="mt-3">
+                      <p className="text-sm text-foreground/70 mb-2">Are you sure? This action cannot be undone.</p>
+                      <div className="flex gap-2"><button onClick={deleteAccount} className="rounded-full bg-destructive/90 px-3 py-2 text-white">Yes, delete</button><button onClick={()=> setConfirmingDelete(false)} className="rounded-full border px-3 py-2">Cancel</button></div>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
           {isVendor ? (
             <>
               <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
