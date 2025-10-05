@@ -143,6 +143,49 @@ export default function Packages() {
     [],
   );
 
+  const { addItem } = useCart();
+
+  const handleAdd = (vendor: any, e: React.MouseEvent) => {
+    // create cart item
+    const price = parsePrice(vendor.price);
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    addItem({ id, name: vendor.name, price, category: vendor.category });
+
+    // animation: clone a floating element from button to cart icon
+    try {
+      const btn = (e.target as HTMLElement).closest('button') as HTMLElement | null;
+      const cartEl = document.getElementById('cart-icon');
+      if (!btn || !cartEl) return;
+      const start = btn.getBoundingClientRect();
+      const end = cartEl.getBoundingClientRect();
+      const floatEl = document.createElement('div');
+      floatEl.textContent = vendor.name;
+      Object.assign(floatEl.style, {
+        position: 'fixed',
+        left: `${start.left}px`,
+        top: `${start.top}px`,
+        background: 'white',
+        padding: '6px 10px',
+        borderRadius: '8px',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+        transition: 'transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms',
+        zIndex: '9999',
+      });
+      document.body.appendChild(floatEl);
+      const dx = end.left + end.width / 2 - (start.left + start.width / 2);
+      const dy = end.top + end.height / 2 - (start.top + start.height / 2);
+      requestAnimationFrame(() => {
+        floatEl.style.transform = `translate(${dx}px, ${dy}px) scale(0.25)`;
+        floatEl.style.opacity = '0.0';
+      });
+      setTimeout(() => {
+        floatEl.remove();
+      }, 650);
+    } catch (err) {
+      // ignore animation errors
+    }
+  };
+
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ redirectTo: "/packages" }} replace />;
   }
