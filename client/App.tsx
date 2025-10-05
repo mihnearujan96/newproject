@@ -85,6 +85,14 @@ const App = () => (
               }
             />
             <Route
+              path="/vendor/:slug"
+              element={
+                <MainLayout>
+                  <VendorDetails />
+                </MainLayout>
+              }
+            />
+            <Route
               path="*"
               element={
                 <MainLayout>
