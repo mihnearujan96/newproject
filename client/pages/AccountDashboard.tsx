@@ -13,7 +13,11 @@ export default function AccountDashboard() {
   const [editingProfile, setEditingProfile] = useState(false);
   const [profileForm, setProfileForm] = useState<any>({});
   const [changingPassword, setChangingPassword] = useState(false);
-  const [passwordForm, setPasswordForm] = useState({ current: "", next: "", confirm: "" });
+  const [passwordForm, setPasswordForm] = useState({
+    current: "",
+    next: "",
+    confirm: "",
+  });
   const [confirmingDelete, setConfirmingDelete] = useState(false);
 
   useEffect(() => {
@@ -85,7 +89,9 @@ export default function AccountDashboard() {
     if (idx !== -1) {
       all[idx] = { ...all[idx], ...form };
       localStorage.setItem("eventia.vendor.services", JSON.stringify(all));
-      const myServices = all.filter((s: any) => s.owner === (effectiveUser?.email || user?.email));
+      const myServices = all.filter(
+        (s: any) => s.owner === (effectiveUser?.email || user?.email),
+      );
       setServices(myServices);
     }
     cancelEdit();
@@ -97,7 +103,11 @@ export default function AccountDashboard() {
     );
     const remaining = all.filter((s: any) => s.id !== id);
     localStorage.setItem("eventia.vendor.services", JSON.stringify(remaining));
-    setServices(remaining.filter((s: any) => s.owner === (effectiveUser?.email || user?.email)));
+    setServices(
+      remaining.filter(
+        (s: any) => s.owner === (effectiveUser?.email || user?.email),
+      ),
+    );
   };
 
   const updateRequestStatus = (id: string, status: string) => {
@@ -108,7 +118,11 @@ export default function AccountDashboard() {
     if (idx !== -1) {
       all[idx].status = status;
       localStorage.setItem("eventia.vendor.requests", JSON.stringify(all));
-      setRequests(all.filter((r: any) => r.owner === (effectiveUser?.email || user?.email)));
+      setRequests(
+        all.filter(
+          (r: any) => r.owner === (effectiveUser?.email || user?.email),
+        ),
+      );
     }
   };
 
@@ -168,16 +182,37 @@ export default function AccountDashboard() {
     return (
       <div className="mt-4">
         <div className="flex items-center justify-between">
-          <div className="font-medium">{month.toLocaleString(undefined, { month: "long", year: "numeric" })}</div>
+          <div className="font-medium">
+            {month.toLocaleString(undefined, {
+              month: "long",
+              year: "numeric",
+            })}
+          </div>
           <div className="flex gap-2">
-            <button onClick={prevMonth} className="rounded-full border px-2 py-1">Prev</button>
-            <button onClick={nextMonth} className="rounded-full border px-2 py-1">Next</button>
+            <button
+              onClick={prevMonth}
+              className="rounded-full border px-2 py-1"
+            >
+              Prev
+            </button>
+            <button
+              onClick={nextMonth}
+              className="rounded-full border px-2 py-1"
+            >
+              Next
+            </button>
           </div>
         </div>
         <table className="w-full mt-3 table-fixed">
           <thead>
             <tr className="text-sm text-foreground/70">
-              <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
             </tr>
           </thead>
           <tbody>
@@ -189,7 +224,9 @@ export default function AccountDashboard() {
                   const isBooked = bookedSet.has(iso);
                   return (
                     <td key={di} className="p-2">
-                      <div className={`w-full rounded-md px-2 py-1 text-xs ${isBooked ? 'bg-destructive/20 text-destructive' : 'bg-success/10 text-success'}`}>
+                      <div
+                        className={`w-full rounded-md px-2 py-1 text-xs ${isBooked ? "bg-destructive/20 text-destructive" : "bg-success/10 text-success"}`}
+                      >
                         {d}
                       </div>
                     </td>
@@ -211,9 +248,10 @@ export default function AccountDashboard() {
 
   const saveProfile = () => {
     try {
-      const cur = JSON.parse(localStorage.getItem('eventia.user') || 'null') || {};
+      const cur =
+        JSON.parse(localStorage.getItem("eventia.user") || "null") || {};
       const updated = { ...cur, ...profileForm };
-      localStorage.setItem('eventia.user', JSON.stringify(updated));
+      localStorage.setItem("eventia.user", JSON.stringify(updated));
       setUser(updated);
       setEditingProfile(false);
     } catch (err) {
@@ -223,12 +261,14 @@ export default function AccountDashboard() {
 
   const savePassword = () => {
     try {
-      const cur = JSON.parse(localStorage.getItem('eventia.user') || 'null') || {};
-      if (passwordForm.next !== passwordForm.confirm) return alert('Passwords do not match');
+      const cur =
+        JSON.parse(localStorage.getItem("eventia.user") || "null") || {};
+      if (passwordForm.next !== passwordForm.confirm)
+        return alert("Passwords do not match");
       const updated = { ...cur, password: passwordForm.next };
-      localStorage.setItem('eventia.user', JSON.stringify(updated));
+      localStorage.setItem("eventia.user", JSON.stringify(updated));
       setChangingPassword(false);
-      alert('Password updated');
+      alert("Password updated");
     } catch (err) {
       console.error(err);
     }
@@ -238,15 +278,21 @@ export default function AccountDashboard() {
     try {
       const email = effectiveUser?.email || user?.email;
       // remove user
-      localStorage.removeItem('eventia.user');
-      localStorage.setItem('eventia.auth', 'false');
+      localStorage.removeItem("eventia.user");
+      localStorage.setItem("eventia.auth", "false");
       // remove their services and requests
-      const sv = JSON.parse(localStorage.getItem('eventia.vendor.services') || '[]').filter((s:any)=>s.owner !== email);
-      localStorage.setItem('eventia.vendor.services', JSON.stringify(sv));
-      const rq = JSON.parse(localStorage.getItem('eventia.vendor.requests') || '[]').filter((r:any)=>r.owner !== email);
-      localStorage.setItem('eventia.vendor.requests', JSON.stringify(rq));
-      navigate('/');
-    } catch (err) { console.error(err); }
+      const sv = JSON.parse(
+        localStorage.getItem("eventia.vendor.services") || "[]",
+      ).filter((s: any) => s.owner !== email);
+      localStorage.setItem("eventia.vendor.services", JSON.stringify(sv));
+      const rq = JSON.parse(
+        localStorage.getItem("eventia.vendor.requests") || "[]",
+      ).filter((r: any) => r.owner !== email);
+      localStorage.setItem("eventia.vendor.requests", JSON.stringify(rq));
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -272,19 +318,53 @@ export default function AccountDashboard() {
             <div className="mt-2 space-y-2 text-sm">
               <label className="flex flex-col gap-1">
                 <span className="text-xs text-foreground/70">First name</span>
-                <input className="rounded border px-3 py-2" value={profileForm.firstName || ''} onChange={(e)=> setProfileForm((p:any)=> ({...p, firstName: e.target.value}))} />
+                <input
+                  className="rounded border px-3 py-2"
+                  value={profileForm.firstName || ""}
+                  onChange={(e) =>
+                    setProfileForm((p: any) => ({
+                      ...p,
+                      firstName: e.target.value,
+                    }))
+                  }
+                />
               </label>
               <label className="flex flex-col gap-1">
                 <span className="text-xs text-foreground/70">Last name</span>
-                <input className="rounded border px-3 py-2" value={profileForm.lastName || ''} onChange={(e)=> setProfileForm((p:any)=> ({...p, lastName: e.target.value}))} />
+                <input
+                  className="rounded border px-3 py-2"
+                  value={profileForm.lastName || ""}
+                  onChange={(e) =>
+                    setProfileForm((p: any) => ({
+                      ...p,
+                      lastName: e.target.value,
+                    }))
+                  }
+                />
               </label>
               <label className="flex flex-col gap-1">
                 <span className="text-xs text-foreground/70">City</span>
-                <input className="rounded border px-3 py-2" value={profileForm.city || ''} onChange={(e)=> setProfileForm((p:any)=> ({...p, city: e.target.value}))} />
+                <input
+                  className="rounded border px-3 py-2"
+                  value={profileForm.city || ""}
+                  onChange={(e) =>
+                    setProfileForm((p: any) => ({ ...p, city: e.target.value }))
+                  }
+                />
               </label>
               <div className="flex gap-2">
-                <button onClick={saveProfile} className="rounded-full bg-primary/90 px-3 py-2 text-white">Save</button>
-                <button onClick={()=> setEditingProfile(false)} className="rounded-full border px-3 py-2">Cancel</button>
+                <button
+                  onClick={saveProfile}
+                  className="rounded-full bg-primary/90 px-3 py-2 text-white"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setEditingProfile(false)}
+                  className="rounded-full border px-3 py-2"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           ) : (
@@ -294,9 +374,13 @@ export default function AccountDashboard() {
                   {effectiveUser.firstName} {effectiveUser.lastName}
                 </strong>
               </p>
-              <p className="text-sm text-foreground/70">{effectiveUser.email}</p>
+              <p className="text-sm text-foreground/70">
+                {effectiveUser.email}
+              </p>
               <p className="text-sm text-foreground/70">{effectiveUser.city}</p>
-              <p className="text-sm text-foreground/70">{effectiveUser.yearOfBirth}</p>
+              <p className="text-sm text-foreground/70">
+                {effectiveUser.yearOfBirth}
+              </p>
               <p className="mt-3 text-xs text-foreground/60">
                 Account type: {effectiveUser.accountType}
               </p>
@@ -305,37 +389,110 @@ export default function AccountDashboard() {
         </div>
 
         <div className="col-span-2 space-y-6">
-              <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
-                <h3 className="font-semibold">Calendar</h3>
-                <p className="text-sm text-foreground/70">Overview of bookings and availability. Booked dates are red; available dates are green.</p>
-                <div className="mt-4">
-                  <VendorCalendar requests={requests} />
+          <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
+            <h3 className="font-semibold">Calendar</h3>
+            <p className="text-sm text-foreground/70">
+              Overview of bookings and availability. Booked dates are red;
+              available dates are green.
+            </p>
+            <div className="mt-4">
+              <VendorCalendar requests={requests} />
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
+            <h3 className="font-semibold">Account actions</h3>
+            <div className="mt-4 flex flex-col gap-3">
+              <button
+                onClick={startEditingProfile}
+                className="inline-flex items-center gap-2 rounded-full border px-4 py-2"
+              >
+                Edit profile
+              </button>
+              <button
+                onClick={() => setChangingPassword(true)}
+                className="inline-flex items-center gap-2 rounded-full border px-4 py-2"
+              >
+                Change password
+              </button>
+              <button
+                onClick={() => setConfirmingDelete(true)}
+                className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-destructive"
+              >
+                Delete account
+              </button>
+
+              {changingPassword ? (
+                <div className="mt-3 space-y-2">
+                  <label className="flex flex-col gap-1 text-sm">
+                    <span className="text-xs text-foreground/70">
+                      New password
+                    </span>
+                    <input
+                      type="password"
+                      className="rounded border px-3 py-2"
+                      value={passwordForm.next}
+                      onChange={(e) =>
+                        setPasswordForm((p) => ({ ...p, next: e.target.value }))
+                      }
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1 text-sm">
+                    <span className="text-xs text-foreground/70">
+                      Confirm password
+                    </span>
+                    <input
+                      type="password"
+                      className="rounded border px-3 py-2"
+                      value={passwordForm.confirm}
+                      onChange={(e) =>
+                        setPasswordForm((p) => ({
+                          ...p,
+                          confirm: e.target.value,
+                        }))
+                      }
+                    />
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={savePassword}
+                      className="rounded-full bg-primary/90 px-3 py-2 text-white"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setChangingPassword(false)}
+                      className="rounded-full border px-3 py-2"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
 
-              <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
-                <h3 className="font-semibold">Account actions</h3>
-                <div className="mt-4 flex flex-col gap-3">
-                  <button onClick={startEditingProfile} className="inline-flex items-center gap-2 rounded-full border px-4 py-2">Edit profile</button>
-                  <button onClick={() => setChangingPassword(true)} className="inline-flex items-center gap-2 rounded-full border px-4 py-2">Change password</button>
-                  <button onClick={() => setConfirmingDelete(true)} className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-destructive">Delete account</button>
-
-                  {changingPassword ? (
-                    <div className="mt-3 space-y-2">
-                      <label className="flex flex-col gap-1 text-sm"><span className="text-xs text-foreground/70">New password</span><input type="password" className="rounded border px-3 py-2" value={passwordForm.next} onChange={(e)=> setPasswordForm(p=> ({...p, next: e.target.value}))} /></label>
-                      <label className="flex flex-col gap-1 text-sm"><span className="text-xs text-foreground/70">Confirm password</span><input type="password" className="rounded border px-3 py-2" value={passwordForm.confirm} onChange={(e)=> setPasswordForm(p=> ({...p, confirm: e.target.value}))} /></label>
-                      <div className="flex gap-2"><button onClick={savePassword} className="rounded-full bg-primary/90 px-3 py-2 text-white">Save</button><button onClick={()=> setChangingPassword(false)} className="rounded-full border px-3 py-2">Cancel</button></div>
-                    </div>
-                  ) : null}
-
-                  {confirmingDelete ? (
-                    <div className="mt-3">
-                      <p className="text-sm text-foreground/70 mb-2">Are you sure? This action cannot be undone.</p>
-                      <div className="flex gap-2"><button onClick={deleteAccount} className="rounded-full bg-destructive/90 px-3 py-2 text-white">Yes, delete</button><button onClick={()=> setConfirmingDelete(false)} className="rounded-full border px-3 py-2">Cancel</button></div>
-                    </div>
-                  ) : null}
+              {confirmingDelete ? (
+                <div className="mt-3">
+                  <p className="text-sm text-foreground/70 mb-2">
+                    Are you sure? This action cannot be undone.
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={deleteAccount}
+                      className="rounded-full bg-destructive/90 px-3 py-2 text-white"
+                    >
+                      Yes, delete
+                    </button>
+                    <button
+                      onClick={() => setConfirmingDelete(false)}
+                      className="rounded-full border px-3 py-2"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
+            </div>
+          </div>
           {isVendor ? (
             <>
               <div className="rounded-2xl border border-border/60 bg-white/80 p-6">
