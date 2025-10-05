@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VendorSetup from "./pages/VendorSetup";
+import AccountDashboard from "./pages/AccountDashboard";
 import Packages from "./pages/Packages";
 import { MainLayout } from "./layouts/MainLayout";
 import { AuthProvider } from "./context/AuthContext";
