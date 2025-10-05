@@ -79,7 +79,7 @@ export default function AccountDashboard() {
     if (idx !== -1) {
       all[idx] = { ...all[idx], ...form };
       localStorage.setItem("eventia.vendor.services", JSON.stringify(all));
-      const myServices = all.filter((s: any) => s.owner === user.email);
+      const myServices = all.filter((s: any) => s.owner === (effectiveUser?.email || user?.email));
       setServices(myServices);
     }
     cancelEdit();
@@ -91,7 +91,7 @@ export default function AccountDashboard() {
     );
     const remaining = all.filter((s: any) => s.id !== id);
     localStorage.setItem("eventia.vendor.services", JSON.stringify(remaining));
-    setServices(remaining.filter((s: any) => s.owner === user.email));
+    setServices(remaining.filter((s: any) => s.owner === (effectiveUser?.email || user?.email)));
   };
 
   const updateRequestStatus = (id: string, status: string) => {
@@ -102,7 +102,7 @@ export default function AccountDashboard() {
     if (idx !== -1) {
       all[idx].status = status;
       localStorage.setItem("eventia.vendor.requests", JSON.stringify(all));
-      setRequests(all.filter((r: any) => r.owner === user.email));
+      setRequests(all.filter((r: any) => r.owner === (effectiveUser?.email || user?.email)));
     }
   };
 
@@ -127,14 +127,14 @@ export default function AccountDashboard() {
           <h3 className="font-semibold">Profile</h3>
           <p className="mt-2 text-sm">
             <strong>
-              {user.firstName} {user.lastName}
+              {effectiveUser.firstName} {effectiveUser.lastName}
             </strong>
           </p>
-          <p className="text-sm text-foreground/70">{user.email}</p>
-          <p className="text-sm text-foreground/70">{user.city}</p>
-          <p className="text-sm text-foreground/70">{user.yearOfBirth}</p>
+          <p className="text-sm text-foreground/70">{effectiveUser.email}</p>
+          <p className="text-sm text-foreground/70">{effectiveUser.city}</p>
+          <p className="text-sm text-foreground/70">{effectiveUser.yearOfBirth}</p>
           <p className="mt-3 text-xs text-foreground/60">
-            Account type: {user.accountType}
+            Account type: {effectiveUser.accountType}
           </p>
         </div>
 
