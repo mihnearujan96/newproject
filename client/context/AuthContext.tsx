@@ -60,10 +60,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
     await new Promise((resolve) => setTimeout(resolve, 300));
     if (typeof window !== "undefined") {
       try {
-        const existing = JSON.parse(window.localStorage.getItem("eventia.user") || "null");
+        const existing = JSON.parse(
+          window.localStorage.getItem("eventia.user") || "null",
+        );
         if (!existing) {
           const firstName = email ? email.split("@")[0] : "User";
-          const profile = { firstName, lastName: "", email, accountType: "client" };
+          const profile = {
+            firstName,
+            lastName: "",
+            email,
+            accountType: "client",
+          };
           window.localStorage.setItem("eventia.user", JSON.stringify(profile));
         }
       } catch {}
@@ -71,7 +78,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setIsAuthenticated(true);
   };
 
-  const register = async (profile: UserProfile & { password: string; accountType?: string }) => {
+  const register = async (
+    profile: UserProfile & { password: string; accountType?: string },
+  ) => {
     // In a real app, POST to an API. Here we persist a demo profile in localStorage
     if (typeof window !== "undefined") {
       window.localStorage.setItem("eventia.user", JSON.stringify(profile));

@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 export default function Register() {
   const navigate = useNavigate();
   const { register, setPlanDetails } = useAuth();
-  const [accountType, setAccountType] = useState<'client' | 'vendor'>('client');
+  const [accountType, setAccountType] = useState<"client" | "vendor">("client");
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -46,15 +46,17 @@ export default function Register() {
 
       // If user had plan details saved before, keep them
       try {
-        const savedPlan = JSON.parse(localStorage.getItem("eventia.plan") || "null");
+        const savedPlan = JSON.parse(
+          localStorage.getItem("eventia.plan") || "null",
+        );
         if (savedPlan) setPlanDetails(savedPlan);
       } catch {}
 
-      if (accountType === 'vendor') {
+      if (accountType === "vendor") {
         // Redirect vendor to service creation flow
-        navigate('/vendor/setup');
+        navigate("/vendor/setup");
       } else {
-        navigate('/packages');
+        navigate("/packages");
       }
     } catch (err) {
       setError("Unable to create account. Please try again.");
@@ -79,15 +81,15 @@ export default function Register() {
         <div className="inline-flex rounded-2xl bg-white/90 p-1 shadow-sm">
           <button
             type="button"
-            onClick={() => setAccountType('client')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${accountType === 'client' ? 'bg-primary/10 text-primary' : 'text-foreground/70'}`}
+            onClick={() => setAccountType("client")}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${accountType === "client" ? "bg-primary/10 text-primary" : "text-foreground/70"}`}
           >
             I am a client
           </button>
           <button
             type="button"
-            onClick={() => setAccountType('vendor')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${accountType === 'vendor' ? 'bg-primary/10 text-primary' : 'text-foreground/70'}`}
+            onClick={() => setAccountType("vendor")}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${accountType === "vendor" ? "bg-primary/10 text-primary" : "text-foreground/70"}`}
           >
             I am a vendor
           </button>

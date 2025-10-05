@@ -52,10 +52,15 @@ export function Header() {
           <Link
             to={(() => {
               try {
-                const u = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('eventia.user')||'null') : null;
-                return u?.accountType === 'vendor' ? '/vendor/dashboard' : '/account';
+                const u =
+                  typeof window !== "undefined"
+                    ? JSON.parse(localStorage.getItem("eventia.user") || "null")
+                    : null;
+                return u?.accountType === "vendor"
+                  ? "/vendor/dashboard"
+                  : "/account";
               } catch {
-                return '/account';
+                return "/account";
               }
             })()}
             className="rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition hover:text-foreground"
